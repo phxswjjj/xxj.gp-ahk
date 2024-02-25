@@ -1,0 +1,99 @@
+class ScreenController {
+    __New(appId) {
+        this.AppId := appId
+        this.HasReward := true
+    }
+
+    IsChallenge() {
+        if (PixelGetColor(1429, 281, 'RGB') != 0xD19F9E) {
+            return false
+        }
+        if (PixelGetColor(1696, 387, 'RGB') == 0xF1DFAF) {
+            return true
+        }
+        return false
+    }
+
+    TopLeftEmpty() {
+        if (PixelGetColor(378, 427, 'RGB') != 0x486385) {
+            return false
+        }
+        if (PixelGetColor(394, 481, 'RGB') == 0x87B8DF) {
+            Click(394, 481)
+            Sleep(1000)
+            return true
+        }
+        return false
+    }
+    TopMiddleEmpty() {
+        if (PixelGetColor(875, 382, 'RGB') != 0x4C688B) {
+            return false
+        }
+        if (PixelGetColor(891, 418, 'RGB') == 0x82ABCB) {
+            Click(891, 418)
+            Sleep(1000)
+            return true
+        }
+        return false
+    }
+    TopRightEmpty() {
+        if (PixelGetColor(1338, 418, 'RGB') != 0x506B8E) {
+            return false
+        }
+        if (PixelGetColor(1332, 460, 'RGB') == 0x91BDDB) {
+            Click(1332, 460)
+            Sleep(1000)
+            return true
+        }
+        return false
+    }
+
+    BottomLeftEmpty() {
+        if (PixelGetColor(469, 871, 'RGB') != 0x547396) {
+            return false
+        }
+        if (PixelGetColor(484, 902, 'RGB') == 0x7BA4CF) {
+            Click(484, 902)
+            Sleep(1000)
+            return true
+        }
+        return false
+    }
+    BottomMiddleEmpty() {
+        if (PixelGetColor(932, 791, 'RGB') != 0x536F94) {
+            return false
+        }
+        if (PixelGetColor(951, 822, 'RGB') == 0x769FC7) {
+            Click(951, 822)
+            Sleep(1000)
+            return true
+        }
+        return false
+    }
+    BottomRightEmpty() {
+        if (PixelGetColor(1400, 788, 'RGB') != 0x547497) {
+            return false
+        }
+        if (PixelGetColor(1416, 822, 'RGB') == 0x7FA9CF) {
+            Click(1416, 822)
+            Sleep(1000)
+            return true
+        }
+        return false
+    }
+
+    Fight() {
+        if (PixelGetColor(1320, 834, 'RGB') == 0xECCB7C) {
+            Click(1320, 834)
+            Sleep(1000)
+
+            ; 戰鬥
+            if (PixelGetColor(1718, 923, 'RGB') == 0xF5EFCF) {
+                Click(1718, 923)
+                Sleep(500)
+            }
+            return true
+        }
+        return false
+    }
+}

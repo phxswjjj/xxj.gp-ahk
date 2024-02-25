@@ -1,0 +1,91 @@
+#Include ./Utility/Common.ahk2
+#Include ./Job/ScreenJob.ahk2
+
+WinTitle := "仙劍"
+UniqueID := WinExist(WinTitle)
+if not UniqueID {
+    Utility.OutputLog("[" WinTitle "] not found")
+    ExitApp
+}
+Utility.OutputLog("[" WinTitle "] found [" UniqueID "]")
+
+screenCtrl := ScreenController(UniqueID)
+
+SetTimer StoneJob, 200
+
+Return
+
+; 琉璃礦
+StoneJob() {
+    global screenCtrl
+    If not WinActive("ahk_id " UniqueID)
+        return
+
+    if (!screenCtrl.IsChallenge()) {
+        return
+    }
+
+    if (screenCtrl.TopLeftEmpty()) {
+        Utility.OutputLog("TopLeftEmpty")
+        if (screenCtrl.Fight()) {
+            Utility.OutputLog("Fight")
+            ExitApp
+        }
+    }
+    if (screenCtrl.TopMiddleEmpty()) {
+        Utility.OutputLog("TopMiddleEmpty")
+        if (screenCtrl.Fight()) {
+            Utility.OutputLog("Fight")
+            ExitApp
+        }
+    }
+    if (screenCtrl.TopRightEmpty()) {
+        Utility.OutputLog("TopRightEmpty")
+        if (screenCtrl.Fight()) {
+            Utility.OutputLog("Fight")
+            ExitApp
+        }
+    }
+
+    if (screenCtrl.BottomLeftEmpty()) {
+        Utility.OutputLog("BottomLeftEmpty")
+        if (screenCtrl.Fight()) {
+            Utility.OutputLog("Fight")
+            ExitApp
+        }
+    }
+    if (screenCtrl.BottomMiddleEmpty()) {
+        Utility.OutputLog("BottomMiddleEmpty")
+        if (screenCtrl.Fight()) {
+            Utility.OutputLog("Fight")
+            ExitApp
+        }
+    }
+    if (screenCtrl.BottomRightEmpty()) {
+        Utility.OutputLog("BottomRightEmpty")
+        if (screenCtrl.Fight()) {
+            Utility.OutputLog("Fight")
+            ExitApp
+        }
+    }
+}
+
+~RButton::
+{
+    If not WinActive("ahk_id " UniqueID)
+        return
+    
+    MouseGetPos(&MouseX, &MouseY)
+    MouseMove(0, 0)
+    color := PixelGetColor(MouseX, MouseY, 'RGB')
+    Utility.OutputLog("click " color " " MouseX ", " MouseY)
+    
+    MouseMove(MouseX, MouseY)
+}
+
+^!z:: ; Ctrl+Alt+Z hotkey.
+{
+    Utility.OutputLog("Z pressed")
+    Utility.OutputLog("Stopped")
+    ExitApp
+}
