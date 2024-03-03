@@ -19,7 +19,7 @@ class ScreenController {
             return false
         }
         if (PixelGetColor(394, 481, 'RGB') == 0x87B8DF) {
-            Click(394, 481)
+            Click(525, 316)
             Sleep(1000)
             return true
         }
