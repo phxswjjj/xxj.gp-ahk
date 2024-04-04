@@ -15,10 +15,7 @@ class ScreenController {
     }
 
     TopLeftEmpty() {
-        if (PixelGetColor(378, 427, 'RGB') != 0x486385) {
-            return false
-        }
-        if (PixelGetColor(394, 481, 'RGB') == 0x87B8DF) {
+        if (!this._HasPerson(454, 536)) {
             Click(525, 316)
             Sleep(1000)
             return true
@@ -26,10 +23,7 @@ class ScreenController {
         return false
     }
     TopMiddleEmpty() {
-        if (PixelGetColor(875, 382, 'RGB') != 0x4C688B) {
-            return false
-        }
-        if (PixelGetColor(891, 418, 'RGB') == 0x82ABCB) {
+        if (!this._HasPerson(945, 485)) {
             Click(891, 418)
             Sleep(1000)
             return true
@@ -37,10 +31,7 @@ class ScreenController {
         return false
     }
     TopRightEmpty() {
-        if (PixelGetColor(1338, 418, 'RGB') != 0x506B8E) {
-            return false
-        }
-        if (PixelGetColor(1332, 460, 'RGB') == 0x91BDDB) {
+        if (!this._HasPerson(1402, 518)) {
             Click(1332, 460)
             Sleep(1000)
             return true
@@ -49,10 +40,7 @@ class ScreenController {
     }
 
     BottomLeftEmpty() {
-        if (PixelGetColor(469, 871, 'RGB') != 0x547396) {
-            return false
-        }
-        if (PixelGetColor(484, 902, 'RGB') == 0x7BA4CF) {
+        if (!this._HasPerson(542, 964)) {
             Click(484, 902)
             Sleep(1000)
             return true
@@ -60,10 +48,7 @@ class ScreenController {
         return false
     }
     BottomMiddleEmpty() {
-        if (PixelGetColor(932, 791, 'RGB') != 0x536F94) {
-            return false
-        }
-        if (PixelGetColor(951, 822, 'RGB') == 0x769FC7) {
+        if (!this._HasPerson(1011, 887)) {
             Click(951, 822)
             Sleep(1000)
             return true
@@ -71,10 +56,7 @@ class ScreenController {
         return false
     }
     BottomRightEmpty() {
-        if (PixelGetColor(1400, 788, 'RGB') != 0x547497) {
-            return false
-        }
-        if (PixelGetColor(1416, 822, 'RGB') == 0x7FA9CF) {
+        if (!this._HasPerson(1471, 881)) {
             Click(1416, 822)
             Sleep(1000)
             return true
@@ -83,17 +65,39 @@ class ScreenController {
     }
 
     Fight() {
-        if (PixelGetColor(1320, 834, 'RGB') == 0xECCB7C) {
+        if (Utility.ArrayContain([0xECCB7C, 0xECCD7F], PixelGetColor(1320, 834, 'RGB'))) {
             Click(1320, 834)
             Sleep(1000)
 
             ; 戰鬥
-            if (PixelGetColor(1718, 923, 'RGB') == 0xF5EFCF) {
+            if (Utility.ArrayContain([0xF5EFCF, 0xF5EDCC], PixelGetColor(1718, 923, 'RGB'))) {
                 Click(1718, 923)
                 Sleep(500)
             }
             return true
         }
+        return false
+    }
+
+    _HasPerson(posX, posY) {
+        color := PixelGetColor(posX, posY, 'RGB')
+        red := "0x" SubStr(color, 3, 2)
+        red := red + 0
+        green := "0x" SubStr(color, 5, 2)
+        green := green + 0
+        blue := "0x" SubStr(color, 7, 2)
+        blue := blue + 0
+
+        OutputDebug(red " " green " " blue "`n")
+
+        if (red>=125 and red<=160) {
+            if (green>=95 and green<=120) {
+                if (blue>=90 and blue<=120) {
+                    return true
+                }
+            }
+        }
+
         return false
     }
 }
